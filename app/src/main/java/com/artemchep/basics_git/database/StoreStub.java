@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class StoreStub implements Store {
 
-    private List<Post> postList;
+    private List<Post> postList = new ArrayList<>();
 
     @Override
     public void insert(@NonNull Post post) {
