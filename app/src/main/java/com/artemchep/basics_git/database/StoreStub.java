@@ -12,13 +12,17 @@ import java.util.List;
  * nothing.
  */
 public class StoreStub implements Store {
+
+    private List<Post> postList;
+
     @Override
     public void insert(@NonNull Post post) {
+        postList.add(post);
     }
 
     @NonNull
     @Override
-    public List<Post> select() {
-        return new ArrayList<>();
+    public List<Post> getAllPosts() {
+        return postList;
     }
 }

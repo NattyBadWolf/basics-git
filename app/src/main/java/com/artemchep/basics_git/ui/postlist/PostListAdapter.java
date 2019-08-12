@@ -21,7 +21,7 @@ class PostListAdapter extends ListAdapter<Post, PostListAdapterViewHolder> {
 
             @Override
             public boolean areContentsTheSame(@NonNull Post oldItem, @NonNull Post newItem) {
-                return oldItem.name.equals(newItem.name);
+                return oldItem.getName().equals(newItem.getName());
             }
         });
     }

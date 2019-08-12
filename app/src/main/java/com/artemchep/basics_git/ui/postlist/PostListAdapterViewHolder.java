@@ -17,6 +17,6 @@ class PostListAdapterViewHolder extends RecyclerView.ViewHolder {
     }
 
     void bind(@NonNull Post post) {
-        mTitle.setText(post.name);
+        mTitle.setText(post.getName());
     }
 }
