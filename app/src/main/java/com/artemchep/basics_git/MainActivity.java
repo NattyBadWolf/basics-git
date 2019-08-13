@@ -3,7 +3,6 @@ package com.artemchep.basics_git;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.artemchep.basics_git.ui.OnFragmentOpenListener;
@@ -17,25 +16,23 @@ public class MainActivity extends AppCompatActivity implements OnFragmentOpenLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            showFragment(new PostListFragment());
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.content, new PostListFragment());
+            transaction.commit();
         }
     }
 
     @Override
     public void onPostAddFragmentOpen() {
         PostAddFragment fragment = new PostAddFragment();
-        showFragment(fragment);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
     public void onPostListFragmentOpen() {
-        PostListFragment fragment = new PostListFragment();
-        showFragment(fragment);
-    }
-
-    private void showFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content, fragment);
-        transaction.commit();
+        getSupportFragmentManager().popBackStack();
     }
 }
