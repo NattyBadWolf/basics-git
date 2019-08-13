@@ -1,5 +1,6 @@
 package com.artemchep.basics_git.ui.postadd;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +11,18 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.artemchep.basics_git.App;
 import com.artemchep.basics_git.R;
 import com.artemchep.basics_git.database.Store;
 import com.artemchep.basics_git.domain.Post;
-import com.artemchep.basics_git.ui.postlist.PostListFragment;
+import com.artemchep.basics_git.ui.OnFragmentOpenListener;
 
 public class PostAddFragment extends Fragment {
 
     private EditText postText;
     private Button saveButton;
+    private OnFragmentOpenListener onFragmentOpenListener;
 
     @Nullable
     @Override
@@ -43,6 +44,12 @@ public class PostAddFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        onFragmentOpenListener = (OnFragmentOpenListener) getActivity();
+    }
+
     private void save() {
         final String text = postText.getText().toString();
         if (text.length() == 0) {
@@ -51,14 +58,6 @@ public class PostAddFragment extends Fragment {
 
         final Store store = App.getStore(requireContext());
         store.insert(new Post(text));
-
-        showPostListFragment();
+        onFragmentOpenListener.onPostListFragmentOpen();
     }
-
-    private void showPostListFragment() {
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content, new PostListFragment());
-        transaction.commit();
-    }
-
 }
