@@ -52,7 +52,7 @@ public class PostListFragment extends Fragment {
     public void onStart() {
         super.onStart();
         final Store store = App.getStore(requireContext());
-        mAdapter.submitList(store.getAllPosts());
+        mAdapter.submitList(store.select());
         mAdapter.notifyDataSetChanged();
     }
 

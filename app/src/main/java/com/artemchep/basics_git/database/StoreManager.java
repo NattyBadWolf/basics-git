@@ -9,9 +9,9 @@ import java.util.List;
 
 /**
  * Store implementation that does absolutely
- * nothing.
+ * everything.
  */
-public class StoreStub implements Store {
+public class StoreManager implements Store {
 
     private List<Post> postList = new ArrayList<>();
 
@@ -22,7 +22,7 @@ public class StoreStub implements Store {
 
     @NonNull
     @Override
-    public List<Post> getAllPosts() {
+    public List<Post> select() {
         return postList;
     }
 }

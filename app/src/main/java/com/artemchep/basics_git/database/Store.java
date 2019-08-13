@@ -10,5 +10,5 @@ public interface Store {
     void insert(@NonNull Post post);
 
     @NonNull
-    List<Post> getAllPosts();
+    List<Post> select();
 }
